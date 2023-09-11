@@ -1,0 +1,18 @@
+.container {
+    aspect-ratio: 1 / 1;
+    width: 300px;
+    border: solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.pixelDivRow {
+    border: solid 1px red;
+    display: flex;
+    flex: 1;
+}
+
+.pixelDivColumn {
+    border: solid 1px blue;
+    flex: 1;
+}

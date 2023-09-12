@@ -1,6 +1,6 @@
 .container {
     aspect-ratio: 1 / 1;
-    width: 300px;
+    width: 500px;
     border: solid black;
     display: flex;
     flex-direction: column;
@@ -15,4 +15,8 @@
 .pixelDivColumn {
     border: solid 1px blue;
     flex: 1;
+}
+
+.coloredPixel {
+    background-color: black;
 }

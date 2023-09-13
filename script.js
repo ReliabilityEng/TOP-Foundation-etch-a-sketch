@@ -25,8 +25,9 @@ function generateGrid(gridResolution) {
     }
 }
 
-function addHoverEffect() {
+function draw() {
     const pixels = document.querySelectorAll('.pixelDivColumn');
+
     pixels.forEach((pixel) => pixel.addEventListener('mouseover', 
     () => {
         if(mouseDown) {
@@ -34,30 +35,13 @@ function addHoverEffect() {
         }        
     }
     ));
+
+    pixels.forEach((pixel) => pixel.addEventListener('mousedown', () => {
+        pixel.classList.add('coloredPixel');
+    }),
+    )
     
 }
 
 generateGrid(gridResolution);
-addHoverEffect();
-
-
-
-// isDown = false;
-// const DURATION = 500
-// elem = document.querySelector('body');
-// elem.addEventListener('mousedown', function(event) { 
-// 	// simulating hold event
-//     if (isDown == false){
-// 		isDown = true;
-// 	    setInterval(function() {
-// 			if (isDown == true){
-// 				console.log("Hold");
-//                 console.log(event.target)
-// 			}
-// 		}, DURATION);
-// 	}
-// });
-
-// elem.addEventListener('mouseup', function(event) {
-// 	isDown=false;  
-// });
+draw();

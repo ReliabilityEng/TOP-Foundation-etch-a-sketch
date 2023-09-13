@@ -85,9 +85,18 @@ function drawV2() {
     )
 }
 
+function clearGridV2() {
+    const pixels = document.querySelectorAll('.pixelDivColumn');
+    
+    pixels.forEach((pixel) => {
+            // Clear the background color of the pixel
+            pixel.setAttribute('style', 'background-color: ""');
+        });
+}
+
 // Calling Functions
 const clearBtn = document.querySelector('#btn-clear');
-clearBtn.addEventListener('click', clearGrid);
+clearBtn.addEventListener('click', clearGridV2);
 
 generateGrid(gridResolution);
 drawV2();

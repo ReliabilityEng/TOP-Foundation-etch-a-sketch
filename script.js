@@ -1,5 +1,5 @@
 // Creation of Elements
-const containerDiv = document.querySelector('.container');
+const gridContainerDiv = document.querySelector('.gridContainer');
 
 // Mouse hold down event
 let mouseDown;
@@ -15,7 +15,7 @@ function generateGrid(gridResolution) {
     for(let rowContainer = 0; rowContainer < gridResolution; rowContainer++) {
             const pixelDivRow = document.createElement('div');
             pixelDivRow.classList.add('pixelDivRow');
-            containerDiv.appendChild(pixelDivRow);
+            gridContainerDiv.appendChild(pixelDivRow);
 
         for(let columnPixel = 0; columnPixel < gridResolution; columnPixel++) {
             const pixelDivCol = document.createElement('div');

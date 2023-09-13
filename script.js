@@ -55,11 +55,11 @@ function clearGrid() {
         });
 }
 
-function getRandomCOlor() {
+function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
     const HEX_LENGTH = 6;
-    
+
     for (let i = 0; i < HEX_LENGTH; i++) {
         let randomIndex = Math.floor(Math.random() * 16); // Random number between 0 - 15
         color += letters[randomIndex];
@@ -68,9 +68,26 @@ function getRandomCOlor() {
     return color;
 }
 
+function setRandomColor(element) {
+    element.setAttribute('style', `background-color: ${getRandomColor()}`);
+}
+
+function drawV2() {
+    // Instead of modifying the class this will modify the style of the divs
+    const pixels = document.querySelectorAll('.pixelDivColumn');
+    const events = ['mousedown', 'mouseover'];
+    
+    events.forEach((evt) => {
+        pixels.forEach((pixel) => {
+            pixel.addEventListener(evt, () => setRandomColor(pixel))
+        })
+    }
+    )
+}
+
 // Calling Functions
 const clearBtn = document.querySelector('#btn-clear');
 clearBtn.addEventListener('click', clearGrid);
 
 generateGrid(gridResolution);
-draw();
+drawV2();

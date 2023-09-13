@@ -43,5 +43,20 @@ function draw() {
     
 }
 
+function clearGrid() {
+    const pixels = document.querySelectorAll('.pixelDivColumn');
+    
+    pixels.forEach((pixel) => {
+            // Clear pixel grid of any class
+            pixel.className = "";
+
+            // Reinstate the default class
+            pixel.classList.add("pixelDivColumn");
+        });
+}
+
+const clearBtn = document.querySelector('#btn-clear');
+clearBtn.addEventListener('click', clearGrid);
+
 generateGrid(gridResolution);
 draw();

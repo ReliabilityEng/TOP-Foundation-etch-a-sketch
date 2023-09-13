@@ -6,10 +6,10 @@ let mouseDown;
 window.addEventListener('mousedown',(evt) => mouseDown = true);
 window.addEventListener('mouseup',(evt) => mouseDown = false);
 
-
 // Variables
 let gridResolution = 32;    // This is 1:1 Aspect Ratio
 
+// Functions
 function generateGrid(gridResolution) {
     // Generates a square grid with a vertical and horizontal resolution of gridResolution
     for(let rowContainer = 0; rowContainer < gridResolution; rowContainer++) {
@@ -55,6 +55,20 @@ function clearGrid() {
         });
 }
 
+function getRandomCOlor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    const HEX_LENGTH = 6;
+    
+    for (let i = 0; i < HEX_LENGTH; i++) {
+        let randomIndex = Math.floor(Math.random() * 16); // Random number between 0 - 15
+        color += letters[randomIndex];
+    }
+
+    return color;
+}
+
+// Calling Functions
 const clearBtn = document.querySelector('#btn-clear');
 clearBtn.addEventListener('click', clearGrid);
 

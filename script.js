@@ -69,7 +69,9 @@ function getRandomColor() {
 }
 
 function setRandomColor(element) {
-    element.setAttribute('style', `background-color: ${getRandomColor()}`);
+    if(mouseDown) {
+        element.setAttribute('style', `background-color: ${getRandomColor()}`);
+    }  
 }
 
 function drawV2() {

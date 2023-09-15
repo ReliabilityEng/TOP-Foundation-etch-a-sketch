@@ -74,6 +74,28 @@ function setRandomColor(element) {
     }  
 }
 
+function setBlackInkColor(element)  {
+    if(mouseDown) {
+        element.setAttribute('style', `background-color: black`);
+    }
+}
+
+function setBlackPencil(element)  {
+    if(mouseDown) {
+        // Identify the RGB of the element background color
+        let currentRGB = element.style.backgroundColor.match(/\d+/g)
+        let [r, g, b] = [...currentRGB];
+
+        // Calculate the new RGB by adding a shade darker
+        [r, g, b] = [r - 25.5, g - 25.5, b - 25.5]
+        
+        // Apply the new background color to the element
+        element.setAttribute('style', `background-color: RGB(${r}, ${g}, ${b})`);
+
+        // console.log([r, g, b]);
+    }
+}
+
 function drawV2() {
     // Instead of modifying the class this will modify the style of the divs
     const pixels = document.querySelectorAll('.pixelDivColumn');
@@ -81,7 +103,9 @@ function drawV2() {
     
     events.forEach((evt) => {
         pixels.forEach((pixel) => {
-            pixel.addEventListener(evt, () => setRandomColor(pixel))
+            // pixel.addEventListener(evt, () => setRandomColor(pixel))
+            // pixel.addEventListener(evt, () => setBlackInkColor(pixel))
+            pixel.addEventListener(evt, () => setBlackPencil(pixel))
         })
     }
     )
@@ -92,13 +116,15 @@ function clearGridV2() {
     
     pixels.forEach((pixel) => {
             // Clear the background color of the pixel
-            pixel.setAttribute('style', 'background-color: ""');
+            pixel.setAttribute('style', 'background-color: RGB(255, 255, 255)');
         });
 }
 
 // Calling Functions
 const clearBtn = document.querySelector('#btn-clear');
 clearBtn.addEventListener('click', clearGridV2);
+
+clearGridV2();
 
 generateGrid(gridResolution);
 drawV2();

@@ -7,7 +7,7 @@ window.addEventListener('mousedown',(evt) => mouseDown = true);
 window.addEventListener('mouseup',(evt) => mouseDown = false);
 
 // Variables
-let gridResolution = 32;    // This is 1:1 Aspect Ratio
+let gridResolution = 64;    // This is 1:1 Aspect Ratio
 
 // Functions
 function generateGrid(gridResolution) {
@@ -69,19 +69,19 @@ function getRandomColor() {
 }
 
 function setRandomColor(element) {
-    if(mouseDown) {
+    if(!mouseDown) {
         element.setAttribute('style', `background-color: ${getRandomColor()}`);
     }  
 }
 
 function setBlackInkColor(element)  {
-    if(mouseDown) {
+    if(!mouseDown) {
         element.setAttribute('style', `background-color: black`);
     }
 }
 
 function setBlackPencil(element)  {
-    if(mouseDown) {
+    if(!mouseDown) {
         // Identify the RGB of the element background color
         let currentRGB = element.style.backgroundColor.match(/\d+/g)
         let [r, g, b] = [...currentRGB];
@@ -124,7 +124,6 @@ function clearGridV2() {
 const clearBtn = document.querySelector('#btn-clear');
 clearBtn.addEventListener('click', clearGridV2);
 
-clearGridV2();
-
 generateGrid(gridResolution);
+clearGridV2();
 drawV2();

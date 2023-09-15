@@ -1,19 +1,30 @@
+.container {
+    display: flex;
+    width: 1000px;
+    border: solid blue;
+}
+
+.gridSettings {
+    flex: 1 1 20px;
+    border: red solid;
+}
+
+
 .gridContainer {
     aspect-ratio: 1 / 1;
-    width: 500px;
     border: solid black;
     display: flex;
     flex-direction: column;
+    flex: 1 1 300px;
 }
 
 .pixelDivRow {
-    border: solid 1px red;
     display: flex;
     flex: 1;
 }
 
 .pixelDivColumn {
-    border: solid 1px blue;
+    border: solid 1px rgb(200, 200, 200);
     flex: 1;
 }
 

@@ -34,11 +34,18 @@ window.addEventListener('mousedown',(evt) => mouseDown = true);
 window.addEventListener('mouseup',(evt) => mouseDown = false);
 
 
-// Variables
-let gridResolution = 64;    // This is 1:1 Aspect Ratio
+// Grid Resolution - This is 1:1 Aspect Ratio
+let slider = document.getElementById('gridResolutionSlider');
+let gridResolution = slider.value;  
+
 
 // Functions
 function generateGrid(gridResolution) {
+    // First remove any child element
+    while (gridContainerDiv.firstChild) {
+        gridContainerDiv.removeChild(gridContainerDiv.firstChild);
+    }
+
     // Generates a square grid with a vertical and horizontal resolution of gridResolution
     for(let rowContainer = 0; rowContainer < gridResolution; rowContainer++) {
             const pixelDivRow = document.createElement('div');
@@ -51,6 +58,10 @@ function generateGrid(gridResolution) {
             pixelDivRow.appendChild(pixelDivCol);
         }
     }
+
+    // Restart the grid to apply the DOM background colour manipulations
+    clearGridV2();
+    drawV2();
 }
 
 function draw() {
@@ -146,7 +157,7 @@ function clearGridV2() {
             // Clear the background color of the pixel
             setTimeout(()=>pixel.classList.remove('pixel-transition'),500);
             pixel.classList.add('pixel-transition');
-            
+
             pixel.setAttribute('style', 'background-color: RGB(255, 255, 255)');
         });
 }
@@ -155,6 +166,9 @@ function clearGridV2() {
 const clearBtn = document.querySelector('#btn-clear');
 clearBtn.addEventListener('click', clearGridV2);
 
+slider.addEventListener('click', ()=>{
+    document.getElementById('gridResolutionValue').textContent = slider.value;
+    generateGrid(slider.value);
+})
+
 generateGrid(gridResolution);
-clearGridV2();
-drawV2();

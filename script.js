@@ -1,7 +1,7 @@
 // Creation of Elements
 const gridContainerDiv = document.querySelector('.gridContainer');
 
-
+// Initialising the webpage
 // Hover Mouse Effect
 const buttons = document.querySelectorAll('.btn');
 buttons.forEach((btn) => btn.addEventListener('mouseover', 
@@ -28,6 +28,9 @@ buttons.forEach((btn) => btn.addEventListener('mouseup',
     }
 ))
 
+// Draw Mode
+let drawMode = 'Pencil';
+
 // Mouse hold down event
 let mouseDown;
 window.addEventListener('mousedown',(evt) => mouseDown = true);
@@ -40,7 +43,7 @@ let gridResolution = slider.value;
 
 
 // Functions
-function generateGrid(gridResolution) {
+function generateGrid(gridResolution, drawMode) {
     // First remove any child element
     while (gridContainerDiv.firstChild) {
         gridContainerDiv.removeChild(gridContainerDiv.firstChild);
@@ -61,7 +64,7 @@ function generateGrid(gridResolution) {
 
     // Restart the grid to apply the DOM background colour manipulations
     clearGridV2();
-    drawV2();
+    drawV2(drawMode);
 }
 
 function draw() {
@@ -115,7 +118,7 @@ function setRandomColor(element) {
 
 function setBlackInkColor(element)  {
     if(!mouseDown) {
-        element.setAttribute('style', `background-color: black`);
+        element.setAttribute('style', `background-color: RGB(0, 0, 0)`);
     }
 }
 
@@ -135,16 +138,25 @@ function setBlackPencil(element)  {
     }
 }
 
-function drawV2() {
+function drawV2(drawMode) {
     // Instead of modifying the class this will modify the style of the divs
     const pixels = document.querySelectorAll('.pixelDivColumn');
     const events = ['mousedown', 'mouseover'];
     
     events.forEach((evt) => {
         pixels.forEach((pixel) => {
-            // pixel.addEventListener(evt, () => setRandomColor(pixel))
-            // pixel.addEventListener(evt, () => setBlackInkColor(pixel))
-            pixel.addEventListener(evt, () => setBlackPencil(pixel))
+            switch(drawMode) {
+                case 'Pencil':
+                    pixel.addEventListener(evt, () => setBlackPencil(pixel));
+                    break;
+                case 'Ink':
+                    pixel.addEventListener(evt, () => setBlackInkColor(pixel));
+                    break;
+                case 'Rainbow':
+                    pixel.addEventListener(evt, () => setRandomColor(pixel));
+                    break;    
+            }
+
         })
     }
     )
@@ -169,29 +181,32 @@ clearBtn.addEventListener('click', clearGridV2);
 const toggleBtn = document.getElementById('btn-toggle-style');
 const drawingMode = document.getElementById('current-draw-style');
 
+slider.addEventListener('click', ()=>{
+    document.getElementById('gridResolutionValue').textContent = slider.value;
+    generateGrid(slider.value, drawMode);
+})
+
 toggleBtn.addEventListener('click', ()=>{
 
 switch(drawingMode.textContent) {
     case 'Current: Pencil Mode':
         drawingMode.textContent = "Current: Ink Mode";
+        drawMode = 'Ink';
         break;
     case 'Current: Ink Mode':
         drawingMode.textContent = "Current: LGBT Mode";
+        drawMode = 'Rainbow';
         break;
     case 'Current: LGBT Mode':
         drawingMode.textContent = "Current: Pencil Mode";
+        drawMode = 'Pencil';
         break;
     default:
         drawingMode.textContent = "Current: Pencil Mode";
+        drawMode = 'Pencil';
         break;
 }
-
+    generateGrid(slider.value, drawMode);
 });
 
-slider.addEventListener('click', ()=>{
-    document.getElementById('gridResolutionValue').textContent = slider.value;
-    generateGrid(slider.value);
-})
-
-
-generateGrid(gridResolution);
+generateGrid(gridResolution, drawMode);

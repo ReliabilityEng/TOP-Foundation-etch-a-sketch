@@ -166,9 +166,32 @@ function clearGridV2() {
 const clearBtn = document.querySelector('#btn-clear');
 clearBtn.addEventListener('click', clearGridV2);
 
+const toggleBtn = document.getElementById('btn-toggle-style');
+const drawingMode = document.getElementById('current-draw-style');
+
+toggleBtn.addEventListener('click', ()=>{
+
+switch(drawingMode.textContent) {
+    case 'Current: Pencil Mode':
+        drawingMode.textContent = "Current: Ink Mode";
+        break;
+    case 'Current: Ink Mode':
+        drawingMode.textContent = "Current: LGBT Mode";
+        break;
+    case 'Current: LGBT Mode':
+        drawingMode.textContent = "Current: Pencil Mode";
+        break;
+    default:
+        drawingMode.textContent = "Current: Pencil Mode";
+        break;
+}
+
+});
+
 slider.addEventListener('click', ()=>{
     document.getElementById('gridResolutionValue').textContent = slider.value;
     generateGrid(slider.value);
 })
+
 
 generateGrid(gridResolution);

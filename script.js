@@ -1,10 +1,38 @@
 // Creation of Elements
 const gridContainerDiv = document.querySelector('.gridContainer');
 
+
+// Hover Mouse Effect
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach((btn) => btn.addEventListener('mouseover', 
+    () => {
+        btn.classList.add('btn-hover');
+    }
+))
+
+buttons.forEach((btn) => btn.addEventListener('mouseout', 
+    () => {
+        btn.classList.remove('btn-hover');
+    }
+))
+
+buttons.forEach((btn) => btn.addEventListener('mousedown', 
+    () => {
+        btn.classList.add('btn-click');
+    }
+))
+
+buttons.forEach((btn) => btn.addEventListener('mouseup', 
+    () => {
+        btn.classList.remove('btn-click');
+    }
+))
+
 // Mouse hold down event
 let mouseDown;
 window.addEventListener('mousedown',(evt) => mouseDown = true);
 window.addEventListener('mouseup',(evt) => mouseDown = false);
+
 
 // Variables
 let gridResolution = 64;    // This is 1:1 Aspect Ratio
@@ -116,6 +144,9 @@ function clearGridV2() {
     
     pixels.forEach((pixel) => {
             // Clear the background color of the pixel
+            setTimeout(()=>pixel.classList.remove('pixel-transition'),500);
+            pixel.classList.add('pixel-transition');
+            
             pixel.setAttribute('style', 'background-color: RGB(255, 255, 255)');
         });
 }
